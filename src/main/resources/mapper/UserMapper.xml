@@ -17,7 +17,7 @@
         where id = #{id}
     </select>
 
-    <insert id="insertUser" parameterType="week01.project.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUser" parameterType="week01.project.pojo.User" keyProperty="id">
         insert into user(id, password, name, role)
         values (#{id}, #{password}, #{name}, #{role})
     </insert>

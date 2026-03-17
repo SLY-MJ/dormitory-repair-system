@@ -1,9 +1,10 @@
-package week01.project.mapper;
+package week01.project;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import week01.project.mapper.UserMapper;
 import week01.project.pojo.User;
 
 import java.io.IOException;
@@ -16,9 +17,10 @@ public class test {
 
         try (SqlSession session = factory.openSession(true)) {
             UserMapper mapper = session.getMapper(UserMapper.class);
-            mapper.insertUser("123", "password123", "John Doe", "user");
-            User user = mapper.selectById("123");
-            System.out.println("User ID: " + user.getId());
+            User user = new User("123", "password123", "John Doe", "user");
+            mapper.insertUser(user);
+            User user1 = mapper.selectById("123");
+            System.out.println("User ID: " + user1.getName());
         }
 
     }
