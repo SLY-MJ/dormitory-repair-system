@@ -1,4 +1,4 @@
-package week01.project.mapper.pojo;
+package week01.project.pojo;
 
 public class User {
     private String id;

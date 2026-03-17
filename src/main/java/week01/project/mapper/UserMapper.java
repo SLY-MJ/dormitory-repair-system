@@ -1,6 +1,6 @@
 package week01.project.mapper;
 
-import week01.project.mapper.pojo.User;
+import week01.project.pojo.User;
 
 public interface UserMapper {
     User selectById(String id);

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="week01.project.mapper.UserMapper">
 
-    <resultMap id="UserMap" type="week01.project.mapper.pojo.User">
+    <resultMap id="UserMap" type="week01.project.pojo.User">
         <id property="id" column="id"/>
         <result property="role" column="role"/>
         <result property="name" column="name"/>
@@ -17,7 +17,7 @@
         where id = #{id}
     </select>
 
-    <insert id="insertUser" parameterType="week01.project.mapper.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUser" parameterType="week01.project.pojo.User" useGeneratedKeys="true" keyProperty="id">
         insert into user(id, password, name, role)
         values (#{id}, #{password}, #{name}, #{role})
     </insert>
