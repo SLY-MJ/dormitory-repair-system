@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="week01.project.mapper.StudentMapper">
+    <!--student的部分映射-->
+    <resultMap id="StudentMap" type="week01.project.pojo.Student">
+        <id property="id" column="id"/>
+        <result property="buildingNo" column="buildingNo"/>
+        <result property="roomNo" column="roomNo"/>
+    </resultMap>
+
+    <!-- student的完整映射-->
+    <resultMap id="StudentAllMap" type="week01.project.pojo.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="role" column="role"/>
+        <result property="buildingNo" column="buildingNo"/>
+        <result property="roomNo" column="roomNo"/>
+    </resultMap>
+
+    <insert id="insertStudent" parameterType="week01.project.pojo.Student" keyProperty="id">
+        insert into student(id, buildingNO, roomNo)
+        values (#{id}, #{buildingNo}, #{roomNo})
+    </insert>
+
+    <delete id="deleteStudentById" parameterType="String">
+        delete
+        from student
+        where id = #{id}
+    </delete>
+    
+    <select id="selectStudentById" resultMap="StudentMap">
+        select id, buildingNo, roomNo
+        from student
+        where id = #{id}
+    </select>
+</mapper>

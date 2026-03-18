@@ -17,6 +17,17 @@
         where id = #{id}
     </select>
 
+    <select id="selectAll" resultMap="UserMap">
+        select id, name, password, role
+        from user
+    </select>
+
+    <select id="selectByRole" resultMap="UserMap">
+        select id, name, password, role
+        from user
+        where role = #{role}
+    </select>
+
     <insert id="insertUser" parameterType="week01.project.pojo.User" keyProperty="id">
         insert into user(id, password, name, role)
         values (#{id}, #{password}, #{name}, #{role})
@@ -27,4 +38,18 @@
         from user
         where id = #{id}
     </delete>
+
+    <update id="updateUser" parameterType="week01.project.pojo.User">
+        update user
+        set name     = #{name},
+            password = #{password},
+            role     = #{role}
+        where id = #{id}
+    </update>
+
+    <update id="updateId">
+        update user
+        set id = #{newId}
+        where id = #{oldId}
+    </update>
 </mapper>

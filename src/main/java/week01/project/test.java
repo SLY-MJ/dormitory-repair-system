@@ -9,6 +9,8 @@ import week01.project.pojo.User;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Iterator;
+import java.util.List;
 
 public class test {
     public static void main(String[] args) throws IOException {
@@ -17,10 +19,14 @@ public class test {
 
         try (SqlSession session = factory.openSession(true)) {
             UserMapper mapper = session.getMapper(UserMapper.class);
-            User user = new User("123", "password123", "John Doe", "user");
+            User user = new User("321", "password321", "mj", "admin");
             mapper.insertUser(user);
-            User user1 = mapper.selectById("123");
-            System.out.println("User ID: " + user1.getName());
+            List<User> list = mapper.selectAll();
+            for (User user1 : list) {
+                System.out.println("User ID: " + user1.getId());
+                System.out.println("User Name: " + user1.getName());
+                System.out.println("User Role: " + user1.getRole());
+            }
         }
 
     }
