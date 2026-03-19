@@ -36,4 +36,31 @@
         from student
         where id = #{id}
     </select>
+
+    <select id="selectStudentsDetailById" resultMap="StudentAllMap">
+        select a.id, a.name, a.password, a.role, b.buildingNo, b.roomNo
+        from user as a
+                 inner join student as b
+        where a.id = b.id and a.id = #{id}
+    </select>
+    
+    <select id="selectAllStudents" resultMap="StudentAllMap">
+        select a.id, a.name, a.password, a.role, b.buildingNo, b.roomNo
+        from user as a
+                 inner join student as b
+        where a.id = b.id
+    </select>
+    
+    <update id="updateStudent" parameterType="week01.project.pojo.Student">
+        update student
+        set buildingNo = #{buildingNo},
+            roomNo     = #{roomNo}
+        where id = #{id}
+    </update>
+    
+    <update id="updateStudentId">
+        update student
+        set id = #{newId}
+        where id = #{oldId}
+    </update>
 </mapper>
