@@ -1,7 +1,7 @@
 package week01.project.pojo;
 
 public class Repair {
-    private String id;
+    private int id;
     private String adminId;
     private String studentId;
     private String description;
@@ -11,20 +11,28 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(String id, String studentId, String description, String status, String date) {
-        this.id = id;
+    public Repair(String studentId, String adminId, String description, String status, String date) {
+        this.adminId = adminId;
         this.studentId = studentId;
         this.description = description;
         this.status = status;
         this.date = date;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
     public String getStudentId() {

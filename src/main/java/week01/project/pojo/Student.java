@@ -8,8 +8,8 @@ public class Student extends User {
         super();
     }
 
-    public Student(String id,String name, String password ,String role,String buildingNo,String roomNo ){
-        super(id,name,password,role);
+    public Student(String id, String name, String password, String role, String buildingNo, String roomNo) {
+        super(id, password, name, role);
         this.buildingNo = buildingNo;
         this.roomNo = roomNo;
     }

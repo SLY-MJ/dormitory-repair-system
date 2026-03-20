@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="week01.project.mapper.AdminMapper">
+
+    <resultMap id="AdminMap" type="week01.project.pojo.Admin">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="role" column="role"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+    <insert id="insertAdmin" parameterType="week01.project.pojo.Admin" keyProperty="id">
+        insert into admin(id, phone)
+        values (#{id}, #{phone})
+    </insert>
+
+    <delete id="deleteAdminById" parameterType="String">
+        delete
+        from admin
+        where id = #{id}
+    </delete>
+
+    <select id="selectAdminById" resultMap="AdminMap" parameterType="String">
+        select a.id, a.name, a.password, a.role, b.phone
+        from user as a
+                 inner join admin as b
+        where b.id = #{id}
+          and a.id = b.id
+    </select>
+
+    <select id="selectAllAdmins" resultMap="AdminMap">
+        select a.id, a.name, a.password, a.role, b.phone
+        from user as a
+                 inner join admin as b
+        where a.id = b.id
+    </select>
+
+    <update id="updateAdmin" parameterType="week01.project.pojo.Admin">
+        update admin
+        set phone = #{phone}
+        where id = #{id}
+    </update>
+
+    <update id="updateAdminId" parameterType="String">
+        update admin
+        set id = #{newId}
+        where id = #{oldId}
+    </update>
+</mapper>

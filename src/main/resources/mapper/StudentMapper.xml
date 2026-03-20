@@ -37,7 +37,7 @@
         where id = #{id}
     </select>
 
-    <select id="selectStudentsDetailById" resultMap="StudentAllMap">
+    <select id="selectStudentDetailById" resultMap="StudentAllMap">
         select a.id, a.name, a.password, a.role, b.buildingNo, b.roomNo
         from user as a
                  inner join student as b

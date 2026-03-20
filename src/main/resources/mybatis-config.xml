@@ -19,5 +19,6 @@
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/RepairMapper.xml"/>
         <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/AdminMapper.xml"/>
     </mappers>
 </configuration>
