@@ -4,7 +4,9 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import week01.project.mapper.RepairMapper;
 import week01.project.mapper.UserMapper;
+import week01.project.pojo.Repair;
 import week01.project.pojo.User;
 
 import java.io.Reader;
@@ -63,21 +65,54 @@ public class UserService {
         }
     }
 
-    public boolean changePassword(User user){
-        try (SqlSession session= FACTORY.openSession(false)){
-            UserMapper userMapper=session.getMapper(UserMapper.class);
+    public boolean changePassword(User user) {
+        try (SqlSession session = FACTORY.openSession(false)) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
             userMapper.updateUser(user);
             session.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return true;
     }
 
-    public List<User> getAllUsers(){
-        try (SqlSession session= FACTORY.openSession(false)){
-            UserMapper userMapper=session.getMapper(UserMapper.class);
+    public List<User> getAllUsers() {
+        try (SqlSession session = FACTORY.openSession(false)) {
+            UserMapper userMapper = session.getMapper(UserMapper.class);
             return userMapper.selectAll();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean deleteRepair(int repairId) {
+        try (SqlSession session = getFactory().openSession(false)) {
+            RepairMapper mapper = session.getMapper(RepairMapper.class);
+            Repair repair = mapper.selectById(repairId);
+            if (repair == null) {
+                throw new RuntimeException("Repair with ID " + repairId + " does not exist.");
+            }
+            mapper.deleteRepairById(repairId);
+            session.commit();
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean updateRepair(Repair repair){
+        if (repair==null){
+            throw new RuntimeException("repair is null");
+        }
+
+        try (SqlSession session = getFactory().openSession(false)){
+            RepairMapper mapper = session.getMapper(RepairMapper.class);
+            Repair target=mapper.selectById(repair.getId());
+            if (target==null){
+                throw new RuntimeException("Repair with ID " + repair.getId() + " does not exist.");
+            }
+            mapper.updateRepair(repair);
+            return true;
         }catch (Exception e){
             throw new RuntimeException(e);
         }
